@@ -1,0 +1,54 @@
+{
+    "dogs": [
+        {
+            "id": 1,
+            "name": "Bear",
+            "breed": "German Shepherd",
+            "birthday": "04/01/2015",
+            "size": "medium",
+            "shelter": 1
+        },
+        {
+            "id": 2,
+            "name": "Charlie",
+            "breed": "Chihuahua",
+            "birthday": "12/05/2017",
+            "size": "small",
+            "shelter": 1
+        },
+        {
+            "id": 3,
+            "name": "Dozer",
+            "breed": "Pug",
+            "birthday": "02/21/2019",
+            "size": "medium",
+            "shelter": 1
+        },
+        {
+            "id": 4,
+            "name": "Frodo",
+            "breed": "Dobermann",
+            "birthday": "10/10/2016",
+            "size": "medium",
+            "shelter": 1
+        },
+        {
+            "id": 5,
+            "name": "Lucky",
+            "breed": "St. Bernard",
+            "birthday": "06/18/2018",
+            "size": "large",
+            "shelter": 1
+        }
+    ],
+    "shelters": [
+        {
+            "id": 1,
+            "name": "Seattle Animal Shelter",
+            "location": "Seattle, WA",
+            "hours": "9:00 AM - 5:00 PM",
+            "phone": "(206) 386-7387",
+            "address": "2061 15th Ave W, Seattle, WA 98119"
+        }
+    ]
+}
