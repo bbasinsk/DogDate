@@ -15,6 +15,10 @@
 		08632797222A71B900633FB6 /* BrowseDogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08632796222A71B900633FB6 /* BrowseDogsViewController.swift */; };
 		08632799222A720200633FB6 /* DogDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08632798222A720200633FB6 /* DogDetailsViewController.swift */; };
 		0863279B222A73F400633FB6 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863279A222A73F400633FB6 /* FavoritesViewController.swift */; };
+		91CF3B99222FA537003EAE0A /* ShelterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF3B98222FA537003EAE0A /* ShelterViewCell.swift */; };
+		91CF3B9B222FAD72003EAE0A /* DogViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF3B9A222FAD72003EAE0A /* DogViewCell.swift */; };
+		91CF3B9D222FB07F003EAE0A /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF3B9C222FB07F003EAE0A /* FilterTableViewController.swift */; };
+		91CF3B9F222FB0D5003EAE0A /* BreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CF3B9E222FB0D5003EAE0A /* BreedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		08632796222A71B900633FB6 /* BrowseDogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDogsViewController.swift; sourceTree = "<group>"; };
 		08632798222A720200633FB6 /* DogDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogDetailsViewController.swift; sourceTree = "<group>"; };
 		0863279A222A73F400633FB6 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		91CF3B98222FA537003EAE0A /* ShelterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterViewCell.swift; sourceTree = "<group>"; };
+		91CF3B9A222FAD72003EAE0A /* DogViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogViewCell.swift; sourceTree = "<group>"; };
+		91CF3B9C222FB07F003EAE0A /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		91CF3B9E222FB0D5003EAE0A /* BreedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,10 @@
 				08632784222A706A00633FB6 /* AppDelegate.swift */,
 				08632786222A706A00633FB6 /* BrowseSheltersViewController.swift */,
 				08632788222A706A00633FB6 /* Main.storyboard */,
+				91CF3B9E222FB0D5003EAE0A /* BreedViewController.swift */,
+				91CF3B9C222FB07F003EAE0A /* FilterTableViewController.swift */,
+				91CF3B9A222FAD72003EAE0A /* DogViewCell.swift */,
+				91CF3B98222FA537003EAE0A /* ShelterViewCell.swift */,
 				0863279A222A73F400633FB6 /* FavoritesViewController.swift */,
 				08632798222A720200633FB6 /* DogDetailsViewController.swift */,
 				08632796222A71B900633FB6 /* BrowseDogsViewController.swift */,
@@ -145,10 +157,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				08632799222A720200633FB6 /* DogDetailsViewController.swift in Sources */,
+				91CF3B9B222FAD72003EAE0A /* DogViewCell.swift in Sources */,
 				08632787222A706A00633FB6 /* BrowseSheltersViewController.swift in Sources */,
+				91CF3B99222FA537003EAE0A /* ShelterViewCell.swift in Sources */,
 				08632785222A706A00633FB6 /* AppDelegate.swift in Sources */,
 				0863279B222A73F400633FB6 /* FavoritesViewController.swift in Sources */,
 				08632797222A71B900633FB6 /* BrowseDogsViewController.swift in Sources */,
+				91CF3B9D222FB07F003EAE0A /* FilterTableViewController.swift in Sources */,
+				91CF3B9F222FB0D5003EAE0A /* BreedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
