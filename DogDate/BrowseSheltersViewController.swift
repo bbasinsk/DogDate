@@ -18,10 +18,10 @@ struct Shelter {
     }
 }
 
-class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let shelters = [Shelter(name: "Seattle Animal Shelter", image: "none"), Shelter(name: "Seattle Dog Lovers", image: "none")]
+    let shelters = [Shelter(name: "Seattle Animal Shelter", image: "none"), Shelter(name: "Seattle Dog Lovers", image: "none"), Shelter(name: "Seattle Dog Lovers", image: "none"), Shelter(name: "Seattle Dog Lovers", image: "none")]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return shelters.count
@@ -32,8 +32,16 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
         cell.name.text = shelters[indexPath.row].name
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 309, height: 210)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(collectionView)
+        collectionView.dataSource = self
+        collectionView.delegate = self
         self.collectionView.reloadSections(IndexSet(integer: 0))
         // Do any additional setup after loading the view, typically from a nib.
     }

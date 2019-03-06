@@ -9,5 +9,7 @@
 import UIKit
 
 class DogViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var like: UIButton!
 }
