@@ -19,8 +19,30 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     var filteredDogIDs : [Int] = []
     var dogs : [Dog] = []
     var dogImages : [UIImage] = []
+    var favoriteDogs : [Dog] = []
     
     var currentShelter : Shelter? = nil
+    
+    @IBAction func LikeDogButtonPress(_ sender: Any) {
+        let button = sender as! UIButton
+        self.favoriteDogs.append(self.dogs[button.tag])
+        
+       refreshFavorites()
+    }
+    
+    @IBAction func UnlikeDogButtonPress(_ sender: Any) {
+        let button = sender as! UIButton
+        self.favoriteDogs.remove(at: self.favoriteDogs.firstIndex(of: self.dogs[button.tag]) ?? -1)
+        
+        refreshFavorites()
+    }
+    
+    func refreshFavorites() {
+        UIView.setAnimationsEnabled(false)
+        DispatchQueue.main.async {
+            self.viewDidLoad()
+        }
+    }
     
     // If search bar value is updated
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -49,6 +71,17 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dogViewCell", for: indexPath) as! DogViewCell
         cell.name.text = dogs[self.filteredDogIDs[indexPath.row]].name
         cell.image.image = dogImages[self.filteredDogIDs[indexPath.row]]
+        
+        // Set tag on button so it can be identified on click
+        cell.like!.tag = self.filteredDogIDs[indexPath.row]
+        cell.unlike!.tag = self.filteredDogIDs[indexPath.row]
+        if favoriteDogs.contains(dogs[self.filteredDogIDs[indexPath.row]]) {
+            cell.like!.isHidden = true
+            cell.unlike!.isHidden = false
+        } else {
+            cell.like!.isHidden = false
+            cell.unlike!.isHidden = true
+        }
         return cell
     }
     
@@ -64,12 +97,16 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.delegate = self
         self.collectionView.reloadSections(IndexSet(integer: 0))
         SearchBar.delegate = self
+        UIView.setAnimationsEnabled(true)
     }
     
     
     // Pass on details about dog and shelter
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
+        case "unwindToSheltersSegue":
+            let sheltersVC = segue.destination as! BrowseSheltersViewController
+            sheltersVC.favoriteDogs = self.favoriteDogs
         case "dogBrowseDogDetailsViewSegue":
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let specificDogVC = segue.destination as! DogDetailsViewController

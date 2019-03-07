@@ -27,7 +27,6 @@ extension Shelter: Equatable {
                 lhs.hours == rhs.hours &&
                 lhs.phone == rhs.phone &&
                 lhs.address == rhs.address
-        
     }
 }
 
@@ -70,6 +69,7 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
     var dogsLoaded : Bool = false
     var dogImagesByShelter : [Int: [UIImage]] = [:]
     
+    var favoriteDogs : [Dog] = []
     
     // If search bar value is updated
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -164,7 +164,7 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
                         self.dogImagesByShelter[dog.shelter] = []
                     }
                     self.dogsByShelter[dog.shelter]!.append(dog)
-                    let newSearchStr = dog.name + " " + dog.breed + " " + dog.birthday + " " + dog.size + "size"
+                    let newSearchStr = dog.name + " " + dog.breed + " " + dog.birthday + " " + dog.size
                     self.dogsByShelterSearchStrings[dog.shelter]!.append(newSearchStr.lowercased())
                     // Get dog image
                     if let url = NSURL(string: dog.imageURL) {
@@ -197,13 +197,18 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
     
     // Pass on details about dog and shelter
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let indexPath = collectionView.indexPathsForSelectedItems {
-            let browseDogsVC = segue.destination as! BrowseDogsViewController
-            browseDogsVC.currentShelter = self.shelters[self.filteredShelterIDs[indexPath[0][1]]]
-            browseDogsVC.dogs = self.dogsByShelter[indexPath[0][1] + 1]!
-            browseDogsVC.dogSearchStrings = self.dogsByShelterSearchStrings[indexPath[0][1] + 1]!
-            browseDogsVC.dogImages = self.dogImagesByShelter[indexPath[0][1] + 1]!
-            browseDogsVC.filteredDogIDs = Array(0...(self.dogsByShelter[indexPath[0][1] + 1]!.count - 1))
+        switch segue.identifier {
+        case "toFavorite": break
+        default:
+            if let indexPath = collectionView.indexPathsForSelectedItems {
+                let browseDogsVC = segue.destination as! BrowseDogsViewController
+                browseDogsVC.currentShelter = self.shelters[self.filteredShelterIDs[indexPath[0][1]]]
+                browseDogsVC.dogs = self.dogsByShelter[indexPath[0][1] + 1]!
+                browseDogsVC.dogSearchStrings = self.dogsByShelterSearchStrings[indexPath[0][1] + 1]!
+                browseDogsVC.dogImages = self.dogImagesByShelter[indexPath[0][1] + 1]!
+                browseDogsVC.filteredDogIDs = Array(0...(self.dogsByShelter[indexPath[0][1] + 1]!.count - 1))
+                browseDogsVC.favoriteDogs = self.favoriteDogs
+            }
         }
     }
 }
