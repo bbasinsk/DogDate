@@ -160,7 +160,7 @@
                                                     <state key="normal" title="Like"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmq-yy-ICD">
-                                                    <rect key="frame" x="7" y="89" width="33" height="18"/>
+                                                    <rect key="frame" x="7" y="89" width="77" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -173,7 +173,7 @@
                                             <outlet property="image" destination="WrZ-0Y-OAS" id="Vxq-Dj-4Wz"/>
                                             <outlet property="like" destination="vBc-3M-te1" id="MIH-AO-W2h"/>
                                             <outlet property="name" destination="mmq-yy-ICD" id="G6Y-GP-yjf"/>
-                                            <segue destination="khI-O1-mo8" kind="show" identifier=" " id="zNC-jU-Na7"/>
+                                            <segue destination="khI-O1-mo8" kind="show" identifier="dogBrowseDogDetailsViewSegue" id="zNC-jU-Na7"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -193,7 +193,7 @@
                                     <navigationItem title="Browse Dogs" id="HEO-Qc-Wvd">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="k25-47-NGF">
                                             <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" identifier="detailToShelter" id="sGn-JZ-ZgW"/>
+                                                <segue destination="8NO-To-VHX" kind="unwind" unwindAction="unwindToBrowseSheltersWithSegue:" id="Z7T-vt-IoR"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Location" id="Htv-W1-DUo"/>
@@ -227,6 +227,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IBX-av-ezV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8NO-To-VHX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="831.88405797101461" y="546.42857142857144"/>
         </scene>
@@ -424,7 +425,7 @@
                                     <navigationItem title="Details" id="zbi-lt-3k1">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="CYK-Vq-RjJ">
                                             <connections>
-                                                <segue destination="bzF-Zo-9di" kind="show" identifier="detailToDog" id="GLH-70-dTc"/>
+                                                <segue destination="xop-Rg-Oda" kind="unwind" unwindAction="unwindToBrowseDogsWithSegue:" id="xPd-aD-K4R"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -457,36 +458,36 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Share"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckc-2l-FSh">
-                                <rect key="frame" x="50" y="418" width="66" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dog Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckc-2l-FSh">
+                                <rect key="frame" x="50" y="418" width="148" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwR-ur-XMq">
-                                <rect key="frame" x="50" y="453" width="66" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dog Breed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwR-ur-XMq">
+                                <rect key="frame" x="50" y="453" width="197" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKx-YY-gbj">
-                                <rect key="frame" x="50" y="491" width="65" height="21"/>
+                                <rect key="frame" x="50" y="491" width="136" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwA-Uj-vgp">
-                                <rect key="frame" x="50" y="529" width="65" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwA-Uj-vgp">
+                                <rect key="frame" x="50" y="529" width="136" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gy-me-fqt">
-                                <rect key="frame" x="50" y="566" width="46" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I'm at {Shelter Name}!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gy-me-fqt">
+                                <rect key="frame" x="50" y="566" width="218" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -499,18 +500,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dog name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8V4-GP-Qum">
-                                <rect key="frame" x="50" y="190" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YnZ-UU-CEx">
+                                <rect key="frame" x="50" y="631" width="115" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Breed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9F-T3-g5o">
-                                <rect key="frame" x="50" y="241" width="46" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msf-Dv-Qcp">
+                                <rect key="frame" x="50" y="660" width="63" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxO-YV-iHH">
+                                <rect key="frame" x="50" y="689" width="66" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -518,10 +526,23 @@
                         <viewLayoutGuide key="safeArea" id="UXT-dL-uAz"/>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="DogBirthdayLabel" destination="rKx-YY-gbj" id="f7z-UN-5ll"/>
+                        <outlet property="DogBreedLabel" destination="hwR-ur-XMq" id="LKi-fi-hlL"/>
+                        <outlet property="DogImageView" destination="c2k-ZH-bbM" id="tG5-19-Vqa"/>
+                        <outlet property="DogNameLabel" destination="ckc-2l-FSh" id="rO6-EY-eRU"/>
+                        <outlet property="DogSizeLabel" destination="IwA-Uj-vgp" id="wAa-QW-Lif"/>
+                        <outlet property="ShelterAddressLabel" destination="msf-Dv-Qcp" id="f0I-lc-cBd"/>
+                        <outlet property="ShelterHoursLabel" destination="hSO-LD-sDf" id="b6f-tO-n2e"/>
+                        <outlet property="ShelterLocationLabel" destination="SxO-YV-iHH" id="cYz-nc-ODB"/>
+                        <outlet property="ShelterNameLabel" destination="4gy-me-fqt" id="gKe-4a-tZh"/>
+                        <outlet property="ShelterPhoneNumberLabel" destination="YnZ-UU-CEx" id="0bc-dj-Dir"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng8-ql-iCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xop-Rg-Oda" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="545.57721139430294"/>
+            <point key="canvasLocation" x="1772.4637681159422" y="545.08928571428567"/>
         </scene>
         <!--Booking View Controller-->
         <scene sceneID="k3T-t6-TEZ">
@@ -579,8 +600,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="zNC-jU-Na7"/>
         <segue reference="zwC-zg-ZYV"/>
-        <segue reference="xbd-lV-euW"/>
+        <segue reference="k7Q-XF-CN9"/>
         <segue reference="1Sb-Hs-CxJ"/>
-        <segue reference="QuK-dI-2Bu"/>
+        <segue reference="Kxu-qd-23T"/>
     </inferredMetricsTieBreakers>
 </document>
