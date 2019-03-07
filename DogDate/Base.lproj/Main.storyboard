@@ -105,6 +105,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="SearchBar" destination="X3w-ow-76V" id="R7C-aN-07o"/>
                         <outlet property="collectionView" destination="bB7-um-afY" id="a65-IA-Yr7"/>
                     </connections>
                 </viewController>
@@ -223,6 +224,7 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="SearchBar" destination="Puj-nX-EuW" id="xJa-7R-XHK"/>
                         <outlet property="collectionView" destination="JDD-Mn-jNv" id="323-1v-vP0"/>
                     </connections>
                 </viewController>

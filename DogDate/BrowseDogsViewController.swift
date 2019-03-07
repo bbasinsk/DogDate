@@ -8,41 +8,53 @@
 
 import UIKit
 
-// Represents a single dog
-struct Dog : Codable {
-    var id : Int
-    var name : String
-    var breed : String
-    var birthday : String
-    var size : String
-    var shelter : Int
-    var imageURL : String
-}
 
-class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var SearchBar: UISearchBar!
     
     @IBAction func unwindToBrowseDogs(segue:UIStoryboardSegue) { }
     
+    var dogSearchStrings : [String] = []
+    var filteredDogs : [Dog] = []
     var dogs : [Dog] = []
     var dogsLoaded : Bool = false
     var images : [UIImage] = []
     var currentShelter : Shelter? = nil
     
+    // If search bar value is updated
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let prevDogsDisplayed = self.filteredDogs
+        
+        // Get new shelters to be displayed after filtering
+        self.filteredDogs = []
+        for (index, searchStr) in dogSearchStrings.enumerated() {
+            if searchStr.contains(searchText.lowercased()) || searchText == "" {
+                self.filteredDogs.append(dogs[index])
+            }
+        }
+        
+        // Prevent repeated refresh of UI if no data displayed is changing
+        if prevDogsDisplayed != self.filteredDogs {
+            DispatchQueue.main.async {
+                self.viewDidLoad()
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dogs.count
+        return filteredDogs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dogViewCell", for: indexPath) as! DogViewCell
-        cell.name.text = dogs[indexPath.row].name
-        if let url = NSURL(string: dogs[indexPath.row].imageURL) {
+        cell.name.text = filteredDogs[indexPath.row].name
+        if let url = NSURL(string: filteredDogs[indexPath.row].imageURL) {
             if let data = NSData(contentsOf: url as URL) {
                 cell.image.image = UIImage(data: data as Data)
                 images.append(cell.image.image!)
             }
         }
-        
         return cell
     }
     
@@ -50,48 +62,14 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         return CGSize(width: 140, height: 120)
     }
     
-    // Fetches JSON code from user specified URL
-    func fetchJSON() {
-        let urlString : String = "https://dogdate-api.herokuapp.com/dogs"
-        guard let url = URL(string: urlString) else {return}
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let dataResponse = data,
-                error == nil else {
-                    let errorString : String = error?.localizedDescription ?? "Response Error"
-                    
-                    let alert = UIAlertController(title: "Error Downloading Dog Details", message: errorString, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default))
-                    self.present(alert, animated: true, completion: nil)
-                    return
-            }
-            do {
-                // Decode JSON
-                let response_dogs = try JSONDecoder().decode([Dog].self, from:dataResponse)
-                for dog in response_dogs {
-                    if dog.shelter == 1 {
-                        self.dogs.append(dog)
-                    }
-                }
-                
-                self.dogsLoaded = true
-                DispatchQueue.main.async {
-                    self.viewDidLoad()
-                }
-            } catch {
-                print("JSONSerialization error:", error)
-            }
-        }
-        task.resume()
-    }
-    
+   
     override func viewDidLoad() {
-        if !dogsLoaded { fetchJSON() }
         super.viewDidLoad()
         view.addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
         self.collectionView.reloadSections(IndexSet(integer: 0))
-        // Do any additional setup after loading the view, typically from a nib.
+        SearchBar.delegate = self
     }
     
     
@@ -101,7 +79,7 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         case "dogBrowseDogDetailsViewSegue":
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let specificDogVC = segue.destination as! DogDetailsViewController
-                specificDogVC.currentDog = self.dogs[indexPath[0][1]]
+                specificDogVC.currentDog = self.filteredDogs[indexPath[0][1]]
                 specificDogVC.currentDogImage = images[indexPath[0][1]]
                 specificDogVC.currentShelter = currentShelter
             }
