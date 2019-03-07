@@ -16,26 +16,25 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func unwindToBrowseDogs(segue:UIStoryboardSegue) { }
     
     var dogSearchStrings : [String] = []
-    var filteredDogs : [Dog] = []
+    var filteredDogIDs : [Int] = []
     var dogs : [Dog] = []
-    var dogsLoaded : Bool = false
-    var images : [UIImage] = []
+    var dogImages : [UIImage] = []
+    
     var currentShelter : Shelter? = nil
     
     // If search bar value is updated
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let prevDogsDisplayed = self.filteredDogs
-        
+        let prevDogIDsDisplayed = self.filteredDogIDs
         // Get new shelters to be displayed after filtering
-        self.filteredDogs = []
+        self.filteredDogIDs = []
         for (index, searchStr) in dogSearchStrings.enumerated() {
             if searchStr.contains(searchText.lowercased()) || searchText == "" {
-                self.filteredDogs.append(dogs[index])
+                self.filteredDogIDs.append(index)
             }
         }
         
         // Prevent repeated refresh of UI if no data displayed is changing
-        if prevDogsDisplayed != self.filteredDogs {
+        if prevDogIDsDisplayed != self.filteredDogIDs {
             DispatchQueue.main.async {
                 self.viewDidLoad()
             }
@@ -43,18 +42,13 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredDogs.count
+        return self.filteredDogIDs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dogViewCell", for: indexPath) as! DogViewCell
-        cell.name.text = filteredDogs[indexPath.row].name
-        if let url = NSURL(string: filteredDogs[indexPath.row].imageURL) {
-            if let data = NSData(contentsOf: url as URL) {
-                cell.image.image = UIImage(data: data as Data)
-                images.append(cell.image.image!)
-            }
-        }
+        cell.name.text = dogs[self.filteredDogIDs[indexPath.row]].name
+        cell.image.image = dogImages[self.filteredDogIDs[indexPath.row]]
         return cell
     }
     
@@ -62,7 +56,7 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         return CGSize(width: 140, height: 120)
     }
     
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
@@ -79,11 +73,11 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         case "dogBrowseDogDetailsViewSegue":
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let specificDogVC = segue.destination as! DogDetailsViewController
-                specificDogVC.currentDog = self.filteredDogs[indexPath[0][1]]
-                specificDogVC.currentDogImage = images[indexPath[0][1]]
+                specificDogVC.currentDog = self.dogs[self.filteredDogIDs[indexPath[0][1]]]
+                specificDogVC.currentDogImage = self.dogImages[self.filteredDogIDs[indexPath[0][1]]]
                 specificDogVC.currentShelter = currentShelter
             }
-        default: break            
+        default: break
         }
     }
 }

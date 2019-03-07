@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DogDate/BrowseSheltersViewController.swift"
-            timestampString = "573636102.995869"
+            timestampString = "573637440.4683501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "fetchShelterJSON()"
             landmarkType = "7">
          </BreakpointContent>
