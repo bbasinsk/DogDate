@@ -10,7 +10,7 @@
 
 import UIKit
 
-struct Shelter : Codable {
+struct JSONShelter : Codable {
     var id : Int
     var name : String
     var location : String
@@ -19,19 +19,24 @@ struct Shelter : Codable {
     var address : String
 }
 
+struct Shelter {
+    var shelter : JSONShelter
+    var searchString : String
+}
+
 extension Shelter: Equatable {
     static func == (lhs: Shelter, rhs: Shelter) -> Bool {
-        return  lhs.id == rhs.id &&
-                lhs.name == rhs.name &&
-                lhs.location == rhs.location &&
-                lhs.hours == rhs.hours &&
-                lhs.phone == rhs.phone &&
-                lhs.address == rhs.address
+        return  lhs.shelter.id == rhs.shelter.id &&
+                lhs.shelter.name == rhs.shelter.name &&
+                lhs.shelter.location == rhs.shelter.location &&
+                lhs.shelter.hours == rhs.shelter.hours &&
+                lhs.shelter.phone == rhs.shelter.phone &&
+                lhs.shelter.address == rhs.shelter.address
     }
 }
 
-// Represents a single dog
-struct Dog : Codable {
+// Represents a single dog read directly from JSON
+struct JSONDog : Codable {
     var id : Int
     var name : String
     var breed : String
@@ -41,16 +46,23 @@ struct Dog : Codable {
     var imageURL : String
 }
 
+// Represents a single dog with the image
+// and search string for the dog
+struct Dog {
+    var dog : JSONDog
+    var dogImage : UIImage
+    var searchString : String
+}
+
 extension Dog: Equatable {
     static func == (lhs: Dog, rhs: Dog) -> Bool {
-        return  lhs.id == rhs.id &&
-            lhs.name == rhs.name &&
-            lhs.breed == rhs.breed &&
-            lhs.birthday == rhs.birthday &&
-            lhs.size == rhs.size &&
-            lhs.shelter == rhs.shelter &&
-            lhs.imageURL == lhs.imageURL
-        
+        return  lhs.dog.id == rhs.dog.id &&
+            lhs.dog.name == rhs.dog.name &&
+            lhs.dog.breed == rhs.dog.breed &&
+            lhs.dog.birthday == rhs.dog.birthday &&
+            lhs.dog.size == rhs.dog.size &&
+            lhs.dog.shelter == rhs.dog.shelter &&
+            lhs.dog.imageURL == lhs.dog.imageURL
     }
 }
 
@@ -59,49 +71,49 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var SearchBar: UISearchBar!
     
-    var shelterSearchStrings : [String] = []
-    var filteredShelterIDs : [Int] = []
+    var filteredShelters : [Int] = []
     var shelters : [Shelter] = []
     var sheltersLoaded : Bool = false
     
     var dogsByShelter : [Int : [Dog]] = [:]
-    var dogsByShelterSearchStrings : [Int : [String]] = [:]
     var dogsLoaded : Bool = false
-    var dogImagesByShelter : [Int: [UIImage]] = [:]
-    
     var favoriteDogs : [Dog] = []
     
     // If search bar value is updated
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let prevShelterIDsDisplayed = self.filteredShelterIDs
+        let prevShelterIDsDisplayed = self.filteredShelters
         
         // Get new shelters to be displayed after filtering
-        self.filteredShelterIDs = []
-        for (index, searchStr) in shelterSearchStrings.enumerated() {
-            if searchStr.contains(searchText.lowercased()) || searchText == "" {
-                self.filteredShelterIDs.append(index)
+        self.filteredShelters = []
+        for (index, shelter) in shelters.enumerated() {
+            if shelter.searchString.contains(searchText.lowercased()) || searchText == "" {
+                self.filteredShelters.append(index)
             }
         }
         
         // Prevent repeated refresh of UI if no data displayed is changing
-        if prevShelterIDsDisplayed != self.filteredShelterIDs {
+        if prevShelterIDsDisplayed != self.filteredShelters {
             DispatchQueue.main.async {
                 self.viewDidLoad()
             }
         }
     }
     
+    
     @IBAction func unwindToBrowseShelters(segue:UIStoryboardSegue) { }
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredShelterIDs.count
+        return filteredShelters.count
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "shelterViewCell", for: indexPath) as! ShelterViewCell
-        cell.name.text = self.shelters[self.filteredShelterIDs[indexPath.row]].name
+        cell.name.text = self.shelters[self.filteredShelters[indexPath.row]].shelter.name
         return cell
     }
+    
     
     // Fetches and parses Shelter JSON data
     func fetchShelterJSON() {
@@ -118,12 +130,13 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
                     return
             }
             do {
-                self.shelters = try JSONDecoder().decode([Shelter].self, from:dataResponse)
-                self.filteredShelterIDs = Array(0...(self.shelters.count - 1))
+                let JSONShelters = try JSONDecoder().decode([JSONShelter].self, from:dataResponse)
+                self.filteredShelters = Array(0...(JSONShelters.count - 1))
                 
-                // Create searchable strings
-                for shelter in self.shelters {
-                    self.shelterSearchStrings.append((shelter.name + " " + shelter.address + " " + shelter.location + " " + shelter.address).lowercased())
+                // Create Shelter structs
+                for shelter in JSONShelters {
+                    let searchString : String = (shelter.name + " " + shelter.address + " " + shelter.location + " " + shelter.address)
+                    self.shelters.append(Shelter(shelter: shelter, searchString: searchString.lowercased()))
                 }
                 
                 self.sheltersLoaded = true
@@ -136,6 +149,30 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
         }
         task.resume()
     }
+    
+    
+    // Loads user's favorite dogs if they exist
+    func loadFavorites() {
+        do {
+            let dir = NSHomeDirectory()
+            let dataResponse = try Data(contentsOf: URL(fileURLWithPath: (dir + "/favoritedogs.json")))
+            let JSONDogs : [JSONDog] = try JSONDecoder().decode([JSONDog].self, from: dataResponse)
+            
+            // Reconstruct search string and get image for dog
+            for dog in JSONDogs {
+                let searchString : String = dog.name + " " + dog.breed + " " + dog.birthday + " " + dog.size
+                // Get dog image
+                if let url = NSURL(string: dog.imageURL) {
+                    if let data = NSData(contentsOf: url as URL) {
+                        self.favoriteDogs.append(Dog(dog: dog, dogImage: UIImage(data: data as Data)!, searchString: searchString.lowercased()))
+                    }
+                }
+            }
+        } catch {
+            print("Could not get favorite dogs.")
+        }
+    }
+    
     
     // Fetches and parses Dog JSON data
     func fetchDogJSON() {
@@ -152,23 +189,21 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
                     return
             }
             do {
-                let dogs = try JSONDecoder().decode([Dog].self, from:dataResponse)
-                for dog in dogs {
+                let JSONDogs = try JSONDecoder().decode([JSONDog].self, from:dataResponse)
+                for dog in JSONDogs {
                     if self.dogsByShelter[dog.shelter] == nil {
                         self.dogsByShelter[dog.shelter] = []
-                        self.dogsByShelterSearchStrings[dog.shelter] = []
-                        self.dogImagesByShelter[dog.shelter] = []
                     }
-                    self.dogsByShelter[dog.shelter]!.append(dog)
-                    let newSearchStr = dog.name + " " + dog.breed + " " + dog.birthday + " " + dog.size
-                    self.dogsByShelterSearchStrings[dog.shelter]!.append(newSearchStr.lowercased())
+                    
+                    let searchString : String = dog.name + " " + dog.breed + " " + dog.birthday + " " + dog.size
                     // Get dog image
                     if let url = NSURL(string: dog.imageURL) {
                         if let data = NSData(contentsOf: url as URL) {
-                            self.dogImagesByShelter[dog.shelter]!.append(UIImage(data: data as Data)!)
+                            self.dogsByShelter[dog.shelter]!.append(Dog(dog: dog, dogImage: UIImage(data: data as Data)!, searchString: searchString.lowercased()))
                         }
                     }
                 }
+                
                 self.dogsLoaded = true
                 DispatchQueue.main.async {
                     self.viewDidLoad()
@@ -180,9 +215,13 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
         task.resume()
     }
     
+    
     override func viewDidLoad() {
         if !sheltersLoaded { fetchShelterJSON() }
-        if sheltersLoaded && !dogsLoaded { fetchDogJSON() }
+        if sheltersLoaded && !dogsLoaded {
+            fetchDogJSON()
+            loadFavorites()
+        }
         super.viewDidLoad()
         view.addSubview(collectionView)
         collectionView.dataSource = self
@@ -191,18 +230,19 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
         SearchBar.delegate = self
     }
     
+    
     // Pass on details about dog and shelter
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "toFavorite": break
+        case "shelterToFavoritesSegue":
+            let favoriteDogsVC = segue.destination as! FavoriteViewController
+            favoriteDogsVC.favoriteDogs = self.favoriteDogs
         default:
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let browseDogsVC = segue.destination as! BrowseDogsViewController
-                browseDogsVC.currentShelter = self.shelters[self.filteredShelterIDs[indexPath[0][1]]]
-                browseDogsVC.dogs = self.dogsByShelter[indexPath[0][1] + 1]!
-                browseDogsVC.dogSearchStrings = self.dogsByShelterSearchStrings[indexPath[0][1] + 1]!
-                browseDogsVC.dogImages = self.dogImagesByShelter[indexPath[0][1] + 1]!
-                browseDogsVC.filteredDogIDs = Array(0...(self.dogsByShelter[indexPath[0][1] + 1]!.count - 1))
+                browseDogsVC.currentShelter = self.shelters[self.filteredShelters[indexPath[0][1]]]
+                browseDogsVC.dogs = self.dogsByShelter[self.filteredShelters[indexPath[0][1]] + 1]!
+                browseDogsVC.filteredDogs = Array(0...(self.dogsByShelter[indexPath[0][1] + 1]!.count - 1))
                 browseDogsVC.favoriteDogs = self.favoriteDogs
             }
         }

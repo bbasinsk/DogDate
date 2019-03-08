@@ -8,30 +8,49 @@
 
 import UIKit
 
-struct Fav {
-    let name: String
-    let image: String
-    
-    init(name: String, image: String) {
-        self.name = name
-        self.image = image
-    }
-}
-
 class FavoriteViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var favoriteDogs : [Dog] = []
     
+    @IBAction func UnlikeDogPress(_ sender: Any) {
+        let button = sender as! UIButton
+        self.favoriteDogs.remove(at: button.tag)
+        saveFavorites()
+        refreshFavorites()
+    }
     
-    let dogs = [Fav(name: "Dog", image: "none"), Fav(name: "Dog", image: "none"), Fav(name: "Dog", image: "none"), Fav(name: "Dog", image: "none")]
+    // Stores user favorites to file
+    func saveFavorites() {
+        do {
+            var jsonDogs : [JSONDog] = []
+            for dog in favoriteDogs {
+                jsonDogs.append(dog.dog)
+            }
+            let jsonData = try JSONEncoder().encode(jsonDogs)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let dir = NSHomeDirectory()
+            try jsonString.write(to: URL(fileURLWithPath: (dir + "/favoritedogs.json")), atomically: true, encoding: .utf8)
+        } catch { print(error) }
+    }
+    
+    func refreshFavorites() {
+        UIView.setAnimationsEnabled(false)
+        DispatchQueue.main.async {
+            self.viewDidLoad()
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dogs.count
+        return favoriteDogs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "favViewCell", for: indexPath) as! FavViewCell
-        cell.name.text = dogs[indexPath.row].name
+        cell.name.text = favoriteDogs[indexPath.row].dog.name
+        cell.image.image = favoriteDogs[indexPath.row].dogImage
+        cell.UnlikeButton.tag = indexPath.row
+        
         return cell
     }
     
@@ -41,7 +60,16 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.dataSource = self
         collectionView.delegate = self
         self.collectionView.reloadSections(IndexSet(integer: 0))
-        // Do any additional setup after loading the view, typically from a nib.
+        UIView.setAnimationsEnabled(true)
     }
-
+    
+    // Pass on details about favorite dogs
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "unwindToBrowseSheltersWithSegue":
+            let sheltersVC = segue.destination as! BrowseSheltersViewController
+            sheltersVC.favoriteDogs = self.favoriteDogs
+        default: break
+        }
+    }
 }

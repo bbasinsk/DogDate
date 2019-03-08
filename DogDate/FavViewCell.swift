@@ -9,8 +9,7 @@
 import UIKit
 
 class FavViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var UnlikeButton: UIButton!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var like: UIButton!
     @IBOutlet weak var image: UIImageView!
 }

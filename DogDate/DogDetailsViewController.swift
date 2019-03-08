@@ -24,21 +24,20 @@ class DogDetailsViewController: UIViewController {
     @IBOutlet weak var ShelterLocationLabel: UILabel!
     
     var currentDog : Dog? = nil
-    var currentDogImage : UIImage? = nil
     var currentShelter : Shelter? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DogNameLabel.text = "Name: " + currentDog!.name
-        DogBreedLabel.text = "Breed: " + currentDog!.breed
-        DogBirthdayLabel.text = "Birthday: " + currentDog!.birthday
-        DogSizeLabel.text = "Size: " + currentDog!.size
-        DogImageView.image = currentDogImage!
+        DogNameLabel.text = "Name: " + currentDog!.dog.name
+        DogBreedLabel.text = "Breed: " + currentDog!.dog.breed
+        DogBirthdayLabel.text = "Birthday: " + currentDog!.dog.birthday
+        DogSizeLabel.text = "Size: " + currentDog!.dog.size
+        DogImageView.image = currentDog?.dogImage
         
-        ShelterNameLabel.text = "I'm at " + currentShelter!.name + "!"
-        ShelterHoursLabel.text = "Hours: " + currentShelter!.hours
-        ShelterPhoneNumberLabel.text = "Phone: " + currentShelter!.phone
-        ShelterAddressLabel.text = currentShelter!.address
-        ShelterLocationLabel.text = currentShelter!.location
+        ShelterNameLabel.text = "I'm at " + currentShelter!.shelter.name + "!"
+        ShelterHoursLabel.text = "Hours: " + currentShelter!.shelter.hours
+        ShelterPhoneNumberLabel.text = "Phone: " + currentShelter!.shelter.phone
+        ShelterAddressLabel.text = currentShelter!.shelter.address
+        ShelterLocationLabel.text = currentShelter!.shelter.location
     }
 }
