@@ -85,10 +85,6 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 140, height: 120)
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

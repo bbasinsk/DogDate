@@ -103,10 +103,6 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 309, height: 210)
-    }
-    
     // Fetches and parses Shelter JSON data
     func fetchShelterJSON() {
         let urlString : String = "https://dogdate-api.herokuapp.com/shelters"

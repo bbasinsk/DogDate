@@ -35,10 +35,6 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate, UIColl
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 309, height: 233)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
