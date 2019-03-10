@@ -135,7 +135,8 @@
             "location": "Seattle, WA",
             "hours": "9:00 AM - 5:00 PM",
             "phone": "(206) 386-7387",
-            "address": "2061 15th Ave W, Seattle, WA 98119"
+            "address": "2061 15th Ave W, Seattle, WA 98119",
+            "coordinates": [47.638351, -122.376591]
         },
         {
             "id": 2,
@@ -143,7 +144,8 @@
             "location": "Seattle, WA",
             "hours": "10:00 AM - 7:00 PM",
             "phone": "(206) 557-4661",
-            "address": "2962 1st Ave S, Ste B, Seattle, WA 98134"
+            "address": "2962 1st Ave S, Ste B, Seattle, WA 98134",
+            "coordinates": [47.575798, -122.333904]
         },
         {
             "id": 3,
