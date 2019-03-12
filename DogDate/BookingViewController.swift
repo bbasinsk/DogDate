@@ -7,24 +7,37 @@
 //
 
 import UIKit
+import EventKit
 
 class BookingViewController: UIViewController {
-
+	
+	@IBOutlet weak var bookButton: UIButton!
+	@IBOutlet weak var DogImage: UIImageView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
+		bookButton.applyDesign()
 
-        // Do any additional setup after loading the view.
+		
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
 }
+
+extension UIButton {
+	func applyDesign() {
+		self.backgroundColor = UIColor.blue
+		self.layer.cornerRadius = self.frame.height / 2
+		self.setTitleColor(UIColor.white, for: .normal)
+		
+//		self.layer.shadowColor = UIColor.red.cgColor
+//		self.layer.shadowRadius = 8
+	}
+}
+
+//extension UIImageView {
+//	func applyFrame() {
+//
+//	}
+//}
