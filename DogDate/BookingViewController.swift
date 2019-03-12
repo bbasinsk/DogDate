@@ -8,15 +8,45 @@
 
 import UIKit
 import EventKit
+import CallKit
 
 class BookingViewController: UIViewController {
 	
 	@IBOutlet weak var bookButton: UIButton!
-	@IBOutlet weak var DogImage: UIImageView!
 	
-    override func viewDidLoad() {
+	@IBOutlet weak var dogImage: UIImageView!
+	@IBOutlet weak var dogNameLabel: UILabel!
+	@IBOutlet weak var contactLabel: UILabel!
+	@IBOutlet weak var beginLabel: UILabel!
+	@IBOutlet weak var endLabel: UILabel!
+	@IBOutlet weak var locationLabel: UILabel!
+	@IBOutlet weak var notificationLabel: UILabel!
+	@IBOutlet weak var contactButton: UIButton!
+	@IBOutlet weak var locationButton: UIButton!
+	
+	
+	var currentDog : Dog? = nil
+	var currentShelter : Shelter? = nil
+	
+	override func viewDidLoad() {
         super.viewDidLoad()
 		bookButton.applyDesign()
+		dogNameLabel.text = currentDog!.dog.name
+		dogImage.image = currentDog?.dogImage
+		contactButton.setTitle("" + currentShelter!.shelter.phone, for: .normal)
+		locationButton.setTitle("" + currentShelter!.shelter.address, for: .normal)
+		
+//		DogNameLabel.text = "Name: " + currentDog!.dog.name
+//		DogBreedLabel.text = "Breed: " + currentDog!.dog.breed
+//		DogBirthdayLabel.text = "Birthday: " + currentDog!.dog.birthday
+//		DogSizeLabel.text = "Size: " + currentDog!.dog.size
+//		DogImageView.image = currentDog?.dogImage
+//
+//		ShelterNameLabel.text = "I'm at " + currentShelter!.shelter.name + "!"
+//		ShelterHoursLabel.text = "Hours: " + currentShelter!.shelter.hours
+//		ShelterPhoneNumberLabel.text = "Phone: " + currentShelter!.shelter.phone
+//		ShelterAddressLabel.text = currentShelter!.shelter.address
+//		ShelterLocationLabel.text = currentShelter!.shelter.location
 
 		
     }
