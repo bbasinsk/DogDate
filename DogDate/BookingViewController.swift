@@ -30,9 +30,30 @@ class BookingViewController: UIViewController {
     let dateBeginPicker = UIDatePicker()
     let dateEndPicker = UIDatePicker()
     
+    @IBAction func addNotification(_ sender: UISwitch) {
+        if sender.isOn() {
+            
+        }
+    }
+    
+    @IBAction func bookDate(_ sender: Any) {
+        if (dateEndPicker.date > dateBeginPicker.date) {
+            //alert if the date is booked
+            let alert = UIAlertController(title: "Book a date", message: "Success", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { _ in}))
+            self.present(alert, animated: true, completion: {})
+        } else {
+            //alert if end date is earlier than begin date
+            let alert = UIAlertController(title: "Warning", message: "End date should not be earlier than begin date", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { _ in}))
+            self.present(alert, animated: true, completion: {})
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bookButton.applyDesign()
+        bookButton.isEnabled = false
         dogNameLabel.text = currentDog!.dog.name
         dogImage.image = currentDog?.dogImage
         contactButton.setTitle("" + currentShelter!.shelter.phone, for: .normal)
@@ -96,6 +117,7 @@ class BookingViewController: UIViewController {
             formatter.dateStyle = DateFormatter.Style.short
             formatter.timeStyle = DateFormatter.Style.short
             endDate.text = formatter.string(from: dateEndPicker.date)
+            bookButton.isEnabled = true
             self.view.endEditing(true)
         } else {
             //alert if end date is earlier than begin date
