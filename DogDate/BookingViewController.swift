@@ -12,29 +12,25 @@ import CallKit
 
 class BookingViewController: UIViewController {
 	
-	@IBOutlet weak var bookButton: UIButton!
-	
-	@IBOutlet weak var dogImage: UIImageView!
-	@IBOutlet weak var dogNameLabel: UILabel!
-	@IBOutlet weak var contactLabel: UILabel!
-	@IBOutlet weak var beginLabel: UILabel!
-	@IBOutlet weak var endLabel: UILabel!
-	@IBOutlet weak var locationLabel: UILabel!
-	@IBOutlet weak var notificationLabel: UILabel!
-	@IBOutlet weak var contactButton: UIButton!
-	@IBOutlet weak var locationButton: UIButton!
-	
-	
-	var currentDog : Dog? = nil
-	var currentShelter : Shelter? = nil
+    @IBOutlet weak var bookButton: UIButton!
+
+    @IBOutlet weak var dogImage: UIImageView!
+    @IBOutlet weak var dogNameLabel: UILabel!
+    @IBOutlet weak var contactButton: UIButton!
+    @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var beginField: UITextField!
+    @IBOutlet weak var endField: UITextField!
+
+    var currentDog : Dog? = nil
+    var currentShelter : Shelter? = nil
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		bookButton.applyDesign()
-		dogNameLabel.text = currentDog!.dog.name
-		dogImage.image = currentDog?.dogImage
-		contactButton.setTitle("" + currentShelter!.shelter.phone, for: .normal)
-		locationButton.setTitle("" + currentShelter!.shelter.address, for: .normal)
+        bookButton.applyDesign()
+        dogNameLabel.text = currentDog!.dog.name
+        dogImage.image = currentDog?.dogImage
+        contactButton.setTitle("" + currentShelter!.shelter.phone, for: .normal)
+        locationButton.setTitle("" + currentShelter!.shelter.address, for: .normal)
 		
 //		DogNameLabel.text = "Name: " + currentDog!.dog.name
 //		DogBreedLabel.text = "Breed: " + currentDog!.dog.breed

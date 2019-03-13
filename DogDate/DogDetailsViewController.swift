@@ -40,4 +40,5 @@ class DogDetailsViewController: UIViewController {
         ShelterAddressLabel.text = currentShelter!.shelter.address
         ShelterLocationLabel.text = currentShelter!.shelter.location
     }
+    
 }
