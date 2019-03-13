@@ -9,6 +9,8 @@
 import UIKit
 import EventKit
 import CallKit
+import UserNotifications
+import UserNotificationsUI
 
 class BookingViewController: UIViewController {
     
@@ -20,7 +22,7 @@ class BookingViewController: UIViewController {
     var currentDog : Dog? = nil
 	
     @IBOutlet weak var bookButton: UIButton!
-
+    @IBOutlet weak var notification: UISwitch!
     @IBOutlet weak var dogImage: UIImageView!
     @IBOutlet weak var dogNameLabel: UILabel!
     @IBOutlet weak var contactButton: UIButton!
@@ -30,17 +32,34 @@ class BookingViewController: UIViewController {
     let dateBeginPicker = UIDatePicker()
     let dateEndPicker = UIDatePicker()
     
-    @IBAction func addNotification(_ sender: UISwitch) {
-        if sender.isOn() {
-            
-        }
-    }
-    
     @IBAction func bookDate(_ sender: Any) {
         if (dateEndPicker.date > dateBeginPicker.date) {
+            //Notification Content
+            let content = UNMutableNotificationContent()
+            content.title = "Dog Date Reminder"
+            content.subtitle = beginDate.text!
+            content.body = currentShelter!.shelter.address
+            content.categoryIdentifier = "reminder"
+            content.sound = UNNotificationSound.default
+            
+            //Notification Trigger - when the notification should be fired
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+            
+            //Notification Request
+            let request = UNNotificationRequest(identifier: "Anniversary", content: content, trigger: trigger)
+            
+            //Scheduling the Notification
+            let center = UNUserNotificationCenter.current()
+            center.add(request) { (error) in
+                if let error = error
+                {
+                    print(error.localizedDescription)
+                }
+            }
             //alert if the date is booked
             let alert = UIAlertController(title: "Book a date", message: "Success", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { _ in}))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { _ in
+                self.performSegue(withIdentifier: "bookingToDetail", sender: nil)}))
             self.present(alert, animated: true, completion: {})
         } else {
             //alert if end date is earlier than begin date
@@ -52,6 +71,13 @@ class BookingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //ask for permission for notification
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge, .sound, .alert]) { (granted, error) in
+            //granted = yes, if app is authorized for all of the requested interaction types
+            //granted = no, if one or more interaction type is disallowed
+        }
         bookButton.applyDesign()
         bookButton.isEnabled = false
         dogNameLabel.text = currentDog!.dog.name
@@ -80,12 +106,10 @@ class BookingViewController: UIViewController {
             let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedateBeginPicker));
             let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
             let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
-            
             toolbar.setItems([cancelButton,spaceButton,doneButton], animated: false)
             beginDate.inputAccessoryView = toolbar
             beginDate.inputView = dateBeginPicker
         default:
-            print(dateBeginPicker.date)
             dateEndPicker.isEnabled = true
             dateEndPicker.datePickerMode = .dateAndTime
             dateEndPicker.minimumDate = NSDate() as Date

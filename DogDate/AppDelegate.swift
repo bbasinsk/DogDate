@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder , UIApplicationDelegate {
@@ -16,7 +17,37 @@ class AppDelegate: UIResponder , UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //Configuration
+        let center = UNUserNotificationCenter.current()
+        center.delegate = (self as! UNUserNotificationCenterDelegate)
+        center.requestAuthorization(options: [.badge, .sound, .alert]) { (granted, error) in
+            //granted = yes, if app is authorized for all of the requested interaction types
+            //granted = no, if one or more interaction type is disallowed
+        }
+        
+        let acceptAction = UNNotificationAction(identifier: "accept", title: "Accept", options: .foreground)
+        let invitationCategory = UNNotificationCategory(identifier: "reminder", actions: [acceptAction], intentIdentifiers: [], options: UNNotificationCategoryOptions(rawValue: 0))
+        
+        //Register the app’s notification types and the custom actions that they support.
+        center.setNotificationCategories([invitationCategory])
+
         return true
+    }
+
+    //Handling remote notifications
+    //
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+    {
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
+    {
+        print(error.localizedDescription)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -40,7 +71,44 @@ class AppDelegate: UIResponder , UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate
+{
+    //Here you get the callback for notification, if the app is in FOREGROUND.
+    //Here you decide whether to silently handle the notification or still alert the user.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert, .sound]) //execute the provided completion handler block with the delivery option (if any) that you want the system to use. If you do not specify any options, the system silences the notification.
+    }
+    
+    //Here you get the callback when the user selects a custom action.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
+    {
+        switch response.notification.request.content.categoryIdentifier
+        {
+        case "GENERAL":
+            break
+            
+        case "reminder":
+            switch response.actionIdentifier
+            {
+            case "accept":
+                print("accept")
+            default:
+                break
+            }
+            
+        default:
+            break
+        }
+        completionHandler()
+    }
+    
+    //Here you get the payload of a remote notification whenever it arrives.
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+    {
+        print("Original Remote Notification:\n\(userInfo)")
+        completionHandler(.newData)
+    }
+}
