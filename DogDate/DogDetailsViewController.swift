@@ -10,6 +10,14 @@ import UIKit
 
 
 class DogDetailsViewController: UIViewController {
+    
+    var dogSearchStrings : [String] = []
+    var filteredDogs : [Int] = []
+    var dogs : [Dog] = []
+    var favoriteDogs : [Dog] = []
+    var currentShelter : Shelter? = nil
+    var currentDog : Dog? = nil
+    
     @IBOutlet weak var DogImageView: UIImageView!
     
     @IBOutlet weak var DogSizeLabel: UILabel!
@@ -22,9 +30,6 @@ class DogDetailsViewController: UIViewController {
     @IBOutlet weak var ShelterPhoneNumberLabel: UILabel!
     @IBOutlet weak var ShelterAddressLabel: UILabel!
     @IBOutlet weak var ShelterLocationLabel: UILabel!
-    
-    var currentDog : Dog? = nil
-    var currentShelter : Shelter? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +44,28 @@ class DogDetailsViewController: UIViewController {
         ShelterPhoneNumberLabel.text = "Phone: " + currentShelter!.shelter.phone
         ShelterAddressLabel.text = currentShelter!.shelter.address
         ShelterLocationLabel.text = currentShelter!.shelter.location
+    }
+    
+    // Pass back details about dog to the detail page
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "detailToBooking":
+            let detailVC = segue.destination as! BookingViewController
+            detailVC.dogSearchStrings = self.dogSearchStrings
+            detailVC.filteredDogs = self.filteredDogs
+            detailVC.dogs = self.dogs
+            detailVC.favoriteDogs = self.favoriteDogs
+            detailVC.currentShelter = self.currentShelter
+            detailVC.currentDog = self.currentDog
+        case "detailToDog":
+            let detailVC = segue.destination as! BrowseDogsViewController
+            detailVC.dogSearchStrings = self.dogSearchStrings
+            detailVC.filteredDogs = self.filteredDogs
+            detailVC.dogs = self.dogs
+            detailVC.favoriteDogs = self.favoriteDogs
+            detailVC.currentShelter = self.currentShelter
+        default: break
+        }
     }
     
 }

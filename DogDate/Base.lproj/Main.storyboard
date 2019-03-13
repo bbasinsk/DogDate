@@ -35,7 +35,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="shelterViewCell" id="6ub-0d-dKB" customClass="ShelterViewCell" customModule="DogDate" customModuleProvider="target">
-                                        <rect key="frame" x="19" y="0.0" width="271" height="234"/>
+                                        <rect key="frame" x="52" y="0.0" width="271" height="234"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="271" height="234"/>
@@ -299,7 +299,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTx-1i-vLW">
-                                                    <rect key="frame" x="20" y="290" width="33" height="20"/>
+                                                    <rect key="frame" x="20" y="290" width="216" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -444,7 +444,7 @@
                                     <navigationItem title="Details" id="zbi-lt-3k1">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="CYK-Vq-RjJ">
                                             <connections>
-                                                <segue destination="xop-Rg-Oda" kind="unwind" unwindAction="unwindToBrowseDogsWithSegue:" id="xPd-aD-K4R"/>
+                                                <segue destination="bzF-Zo-9di" kind="show" identifier="detailToDog" id="JBf-md-M5p"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -546,7 +546,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="1Kk-PQ-N9Z" kind="show" id="bHx-fd-Xcz"/>
+                                    <segue destination="1Kk-PQ-N9Z" kind="show" identifier="detailToBooking" id="bHx-fd-Xcz"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog1" translatesAutoresizingMaskIntoConstraints="NO" id="c2k-ZH-bbM">
@@ -577,7 +577,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng8-ql-iCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="xop-Rg-Oda" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1767.2" y="542.87856071964018"/>
         </scene>
@@ -595,7 +594,7 @@
                                     <navigationItem id="cbS-PQ-OQ9">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="ZzU-rS-jtO">
                                             <connections>
-                                                <segue destination="khI-O1-mo8" kind="show" id="ipL-p9-gFb"/>
+                                                <segue destination="khI-O1-mo8" kind="show" identifier="bookingToDetail" id="ipL-p9-gFb"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -685,7 +684,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MWm-3M-Oi2">
-                                                <rect key="frame" x="254" y="108" width="97" height="30"/>
+                                                <rect key="frame" x="165" y="108" width="186" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -701,7 +700,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hjR-Z5-jXa">
-                                                <rect key="frame" x="254" y="153" width="97" height="30"/>
+                                                <rect key="frame" x="165" y="153" width="186" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -772,12 +771,12 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="beginField" destination="MWm-3M-Oi2" id="fbI-i9-vhK"/>
+                        <outlet property="beginDate" destination="MWm-3M-Oi2" id="pVM-Yw-dm6"/>
                         <outlet property="bookButton" destination="XdN-Ny-eyK" id="bbd-WR-Hkt"/>
                         <outlet property="contactButton" destination="D9A-9f-wHZ" id="hv8-hH-eNX"/>
                         <outlet property="dogImage" destination="VcZ-M5-eHF" id="aSU-p6-FAt"/>
                         <outlet property="dogNameLabel" destination="pO0-Lq-gnh" id="i9K-WB-SOw"/>
-                        <outlet property="endField" destination="hjR-Z5-jXa" id="xCw-C8-pV0"/>
+                        <outlet property="endDate" destination="hjR-Z5-jXa" id="XbB-RI-52U"/>
                         <outlet property="locationButton" destination="b16-xp-m5a" id="WIi-8d-fuc"/>
                     </connections>
                 </viewController>
@@ -792,10 +791,9 @@
         <image name="shelter1" width="7952" height="5304"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bHx-fd-Xcz"/>
         <segue reference="ipL-p9-gFb"/>
         <segue reference="zwC-zg-ZYV"/>
         <segue reference="xbd-lV-euW"/>
-        <segue reference="1Sb-Hs-CxJ"/>
+        <segue reference="JBf-md-M5p"/>
     </inferredMetricsTieBreakers>
 </document>

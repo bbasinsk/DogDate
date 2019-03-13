@@ -129,6 +129,11 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
                 let specificDogVC = segue.destination as! DogDetailsViewController
                 specificDogVC.currentDog = self.dogs[self.filteredDogs[indexPath[0][1]]]
                 specificDogVC.currentShelter = currentShelter
+                
+                specificDogVC.dogSearchStrings = self.dogSearchStrings
+                specificDogVC.filteredDogs = self.filteredDogs
+                specificDogVC.dogs = self.dogs
+                specificDogVC.favoriteDogs = self.favoriteDogs
             }
         case "detailToFavoritesSegue":
             let favoritesVC = segue.destination as! FavoriteViewController
