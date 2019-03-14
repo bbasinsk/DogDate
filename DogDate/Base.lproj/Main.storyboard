@@ -35,7 +35,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="shelterViewCell" id="6ub-0d-dKB" customClass="ShelterViewCell" customModule="DogDate" customModuleProvider="target">
-                                        <rect key="frame" x="19" y="0.0" width="271" height="234"/>
+                                        <rect key="frame" x="52" y="0.0" width="271" height="234"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="271" height="234"/>
@@ -140,7 +140,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dogViewCell" id="FoZ-ed-cGx" customClass="DogViewCell" customModule="DogDate" customModuleProvider="target">
-                                        <rect key="frame" x="8.5" y="0.0" width="292" height="342"/>
+                                        <rect key="frame" x="41.5" y="0.0" width="292" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="292" height="342"/>
@@ -687,6 +687,9 @@
                                                     <constraint firstAttribute="height" constant="20" id="dTd-c7-jM8"/>
                                                 </constraints>
                                                 <state key="normal" title="Location Button"/>
+                                                <connections>
+                                                    <action selector="onLocationTap:" destination="1Kk-PQ-N9Z" eventType="touchUpInside" id="A7C-jf-Upk"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Begin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqD-tk-cfp">
                                                 <rect key="frame" x="24" y="113" width="43.5" height="20"/>
@@ -817,7 +820,6 @@
         <image name="shelter1" width="7952" height="5304"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bHx-fd-Xcz"/>
         <segue reference="ipL-p9-gFb"/>
         <segue reference="zwC-zg-ZYV"/>
         <segue reference="xbd-lV-euW"/>

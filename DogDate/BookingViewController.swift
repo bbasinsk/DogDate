@@ -9,6 +9,7 @@
 import UIKit
 import EventKit
 import CallKit
+import MapKit
 import UserNotifications
 import UserNotificationsUI
 
@@ -155,6 +156,24 @@ class BookingViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    @IBAction func onLocationTap(_ sender: Any) {
+        let address = currentShelter!.shelter.address
+        let name = currentShelter!.shelter.name
+        let phone = currentShelter!.shelter.phone
+        
+        coordinates(forAddress: address) {
+            (location) in
+            guard let location = location else { return }
+            
+            let placemark = MKPlacemark(coordinate: location, addressDictionary: nil)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = name
+            mapItem.phoneNumber = phone
+            mapItem.openInMaps(launchOptions: nil)
+        }
+    }
+    
+    
     // Pass back details about dog to the detail page
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -177,14 +196,18 @@ extension UIButton {
 		self.backgroundColor = UIColor.blue
 		self.layer.cornerRadius = self.frame.height / 2
 		self.setTitleColor(UIColor.white, for: .normal)
-		
-//		self.layer.shadowColor = UIColor.red.cgColor
-//		self.layer.shadowRadius = 8
 	}
 }
 
-//extension UIImageView {
-//	func applyFrame() {
-//
-//	}
-//}
+func coordinates(forAddress address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
+    let geocoder = CLGeocoder()
+    geocoder.geocodeAddressString(address) {
+        (placemarks, error) in
+        guard error == nil else {
+            print("Geocoding error: \(error!)")
+            completion(nil)
+            return
+        }
+        completion(placemarks?.first?.location?.coordinate)
+    }
+}
