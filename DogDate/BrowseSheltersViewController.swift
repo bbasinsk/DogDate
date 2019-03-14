@@ -17,6 +17,7 @@ struct JSONShelter : Codable {
     var hours : String
     var phone : String
     var address : String
+    var coordinates: [Double]?
 }
 
 struct Shelter {
@@ -237,6 +238,9 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
         case "shelterToFavoritesSegue":
             let favoriteDogsVC = segue.destination as! FavoriteViewController
             favoriteDogsVC.favoriteDogs = self.favoriteDogs
+        case "listToMapShelters":
+            let mapVC = segue.destination as! BrowseSheltersMapViewController
+            mapVC.shelters = self.shelters
         default:
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let browseDogsVC = segue.destination as! BrowseDogsViewController
