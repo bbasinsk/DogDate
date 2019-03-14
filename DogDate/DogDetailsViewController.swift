@@ -31,6 +31,20 @@ class DogDetailsViewController: UIViewController {
     @IBOutlet weak var ShelterAddressLabel: UILabel!
     @IBOutlet weak var ShelterLocationLabel: UILabel!
     
+    @IBAction func call(_ sender: Any) {
+        let phone = currentShelter!.shelter.phone
+        var num = ""
+        let digitSet = "0123456789"
+        for i in phone {
+            if digitSet.contains(i) {
+                // is digit!
+                num += String(i)
+            }
+        }
+        guard let number = URL(string: "tel://" + num) else { return }
+        UIApplication.shared.open(number)
+    }
+    
     @IBAction func share(_ sender: Any) {
         let vc = UIActivityViewController(activityItems: [DogImageView.image!], applicationActivities: nil)
         vc.popoverPresentationController?.sourceView = self.view

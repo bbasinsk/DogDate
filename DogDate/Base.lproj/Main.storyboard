@@ -455,6 +455,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Call"/>
+                                <connections>
+                                    <action selector="call:" destination="khI-O1-mo8" eventType="touchUpInside" id="Ega-Mm-YDb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M33-kd-4ZL">
                                 <rect key="frame" x="125" y="284" width="117" height="19"/>
