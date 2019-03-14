@@ -288,7 +288,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="favViewCell" id="l0V-Gx-3DE" customClass="FavViewCell" customModule="DogDate" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="309" height="330"/>
+                                        <rect key="frame" x="33" y="0.0" width="309" height="330"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="309" height="330"/>
@@ -530,6 +530,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="share:" destination="khI-O1-mo8" eventType="touchUpInside" id="3Lr-oS-FPj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMg-RV-HjC">
                                 <rect key="frame" x="83" y="243" width="209" height="33"/>
@@ -550,7 +553,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog1" translatesAutoresizingMaskIntoConstraints="NO" id="c2k-ZH-bbM">
-                                <rect key="frame" x="69" y="84" width="236" height="151"/>
+                                <rect key="frame" x="69" y="84" width="235" height="151"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -811,6 +814,7 @@
         <image name="shelter1" width="7952" height="5304"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bHx-fd-Xcz"/>
         <segue reference="ipL-p9-gFb"/>
         <segue reference="zwC-zg-ZYV"/>
         <segue reference="xbd-lV-euW"/>

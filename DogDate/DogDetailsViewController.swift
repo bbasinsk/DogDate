@@ -31,6 +31,12 @@ class DogDetailsViewController: UIViewController {
     @IBOutlet weak var ShelterAddressLabel: UILabel!
     @IBOutlet weak var ShelterLocationLabel: UILabel!
     
+    @IBAction func share(_ sender: Any) {
+        let vc = UIActivityViewController(activityItems: [DogImageView.image!], applicationActivities: nil)
+        vc.popoverPresentationController?.sourceView = self.view
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         DogNameLabel.text = "Name: " + currentDog!.dog.name
