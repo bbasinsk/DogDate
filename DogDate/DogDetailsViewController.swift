@@ -74,7 +74,6 @@ class DogDetailsViewController: UIViewController {
             detailVC.dogSearchStrings = self.dogSearchStrings
             detailVC.filteredDogs = self.filteredDogs
             detailVC.dogs = self.dogs
-            detailVC.favoriteDogs = self.favoriteDogs
             detailVC.currentShelter = self.currentShelter
             detailVC.currentDog = self.currentDog
         case "detailToDog":
@@ -82,7 +81,6 @@ class DogDetailsViewController: UIViewController {
             detailVC.dogSearchStrings = self.dogSearchStrings
             detailVC.filteredDogs = self.filteredDogs
             detailVC.dogs = self.dogs
-            detailVC.favoriteDogs = self.favoriteDogs
             detailVC.currentShelter = self.currentShelter
         default: break
         }

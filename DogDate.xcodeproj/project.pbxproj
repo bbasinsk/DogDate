@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0802D0482235B74E0034F249 /* BrowseSheltersMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802D0472235B74E0034F249 /* BrowseSheltersMapViewController.swift */; };
+		0858CA67223D796E00622B74 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858CA66223D796E00622B74 /* Data.swift */; };
 		08632785222A706A00633FB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08632784222A706A00633FB6 /* AppDelegate.swift */; };
 		08632787222A706A00633FB6 /* BrowseSheltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08632786222A706A00633FB6 /* BrowseSheltersViewController.swift */; };
 		0863278A222A706A00633FB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08632788222A706A00633FB6 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		0802D0472235B74E0034F249 /* BrowseSheltersMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseSheltersMapViewController.swift; sourceTree = "<group>"; };
+		0858CA66223D796E00622B74 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		08632781222A706A00633FB6 /* DogDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DogDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08632784222A706A00633FB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08632786222A706A00633FB6 /* BrowseSheltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseSheltersViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				0863278B222A706B00633FB6 /* Assets.xcassets */,
 				0863278D222A706B00633FB6 /* LaunchScreen.storyboard */,
 				08632790222A706B00633FB6 /* Info.plist */,
+				0858CA66223D796E00622B74 /* Data.swift */,
 			);
 			path = DogDate;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				0802D0482235B74E0034F249 /* BrowseSheltersMapViewController.swift in Sources */,
 				08632785222A706A00633FB6 /* AppDelegate.swift in Sources */,
 				0863279B222A73F400633FB6 /* FavoriteViewController.swift in Sources */,
+				0858CA67223D796E00622B74 /* Data.swift in Sources */,
 				99C48F7422372A6B0022923A /* BookingViewController.swift in Sources */,
 				08632797222A71B900633FB6 /* BrowseDogsViewController.swift in Sources */,
 				91CF3B9D222FB07F003EAE0A /* FilterTableViewController.swift in Sources */,
