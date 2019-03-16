@@ -18,7 +18,6 @@ class BookingViewController: UIViewController {
     var dogSearchStrings : [String] = []
     var filteredDogs : [Int] = []
     var dogs : [Dog] = []
-    var favoriteDogs : [Dog] = []
     var currentShelter : Shelter? = nil
     var currentDog : Dog? = nil
 	
@@ -182,7 +181,6 @@ class BookingViewController: UIViewController {
             detailVC.dogSearchStrings = self.dogSearchStrings
             detailVC.filteredDogs = self.filteredDogs
             detailVC.dogs = self.dogs
-            detailVC.favoriteDogs = self.favoriteDogs
             detailVC.currentShelter = self.currentShelter
             detailVC.currentDog = self.currentDog
         default: break

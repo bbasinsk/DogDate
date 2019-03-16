@@ -101,7 +101,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="shelterViewCell" id="6ub-0d-dKB" customClass="ShelterViewCell" customModule="DogDate" customModuleProvider="target">
-                                        <rect key="frame" x="71.5" y="0.0" width="271" height="234"/>
+                                        <rect key="frame" x="38.5" y="0.0" width="271" height="234"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="271" height="234"/>
@@ -213,7 +213,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dogViewCell" id="FoZ-ed-cGx" customClass="DogViewCell" customModule="DogDate" customModuleProvider="target">
-                                        <rect key="frame" x="61" y="0.0" width="292" height="342"/>
+                                        <rect key="frame" x="28" y="0.0" width="292" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="292" height="342"/>
@@ -351,7 +351,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="favViewCell" id="l0V-Gx-3DE" customClass="FavViewCell" customModule="DogDate" customModuleProvider="target">
-                                        <rect key="frame" x="52.5" y="0.0" width="309" height="330"/>
+                                        <rect key="frame" x="19.5" y="0.0" width="309" height="330"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="309" height="330"/>

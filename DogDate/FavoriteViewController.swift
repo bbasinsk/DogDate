@@ -11,11 +11,10 @@ import UIKit
 class FavoriteViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var favoriteDogs : [Dog] = []
     
     @IBAction func UnlikeDogPress(_ sender: Any) {
         let button = sender as! UIButton
-        self.favoriteDogs.remove(at: button.tag)
+        favoriteDogs.remove(at: button.tag)
         saveFavorites()
         refreshFavorites()
     }
@@ -67,8 +66,7 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "unwindToBrowseSheltersWithSegue":
-            let sheltersVC = segue.destination as! BrowseSheltersViewController
-            sheltersVC.favoriteDogs = self.favoriteDogs
+            return
         default: break
         }
     }

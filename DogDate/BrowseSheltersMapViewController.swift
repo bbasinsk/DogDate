@@ -29,7 +29,6 @@ class ShelterAnnotation: NSObject, MKAnnotation {
 class BrowseSheltersMapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-    var shelters : [Shelter] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

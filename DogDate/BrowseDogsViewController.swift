@@ -18,13 +18,12 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     var dogSearchStrings : [String] = []
     var filteredDogs : [Int] = []
     var dogs : [Dog] = []
-    var favoriteDogs : [Dog] = []
     
     var currentShelter : Shelter? = nil
     
     @IBAction func LikeDogButtonPress(_ sender: Any) {
         let button = sender as! UIButton
-        self.favoriteDogs.append(self.dogs[button.tag])
+        favoriteDogs.append(self.dogs[button.tag])
         
         saveFavorites()
         refreshFavorites()
@@ -48,7 +47,7 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBAction func UnlikeDogButtonPress(_ sender: Any) {
         let button = sender as! UIButton
-        self.favoriteDogs.remove(at: self.favoriteDogs.firstIndex(of: self.dogs[button.tag]) ?? -1)
+        favoriteDogs.remove(at: favoriteDogs.firstIndex(of: self.dogs[button.tag]) ?? -1)
         
         refreshFavorites()
     }
@@ -122,8 +121,7 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "unwindToSheltersSegue":
-            let sheltersVC = segue.destination as! BrowseSheltersViewController
-            sheltersVC.favoriteDogs = self.favoriteDogs
+            return
         case "dogBrowseDogDetailsViewSegue":
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let specificDogVC = segue.destination as! DogDetailsViewController
@@ -133,11 +131,9 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
                 specificDogVC.dogSearchStrings = self.dogSearchStrings
                 specificDogVC.filteredDogs = self.filteredDogs
                 specificDogVC.dogs = self.dogs
-                specificDogVC.favoriteDogs = self.favoriteDogs
             }
         case "detailToFavoritesSegue":
-            let favoritesVC = segue.destination as! FavoriteViewController
-            favoritesVC.favoriteDogs = self.favoriteDogs
+            return
         default: break
         }
     }
