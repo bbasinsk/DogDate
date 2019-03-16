@@ -75,7 +75,6 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
     var filteredShelters : [Int] = []
     var sheltersLoaded : Bool = false
     
-    var dogsByShelter : [Int : [Dog]] = [:]
     var dogsLoaded : Bool = false
     
     // If search bar value is updated
@@ -190,15 +189,15 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
             do {
                 let JSONDogs = try JSONDecoder().decode([JSONDog].self, from:dataResponse)
                 for dog in JSONDogs {
-                    if self.dogsByShelter[dog.shelter] == nil {
-                        self.dogsByShelter[dog.shelter] = []
+                    if dogsByShelter[dog.shelter] == nil {
+                        dogsByShelter[dog.shelter] = []
                     }
                     
                     let searchString : String = dog.name + " " + dog.breed + " " + dog.birthday + " " + dog.size
                     // Get dog image
                     if let url = NSURL(string: dog.imageURL) {
                         if let data = NSData(contentsOf: url as URL) {
-                            self.dogsByShelter[dog.shelter]!.append(Dog(dog: dog, dogImage: UIImage(data: data as Data)!, searchString: searchString.lowercased()))
+                            dogsByShelter[dog.shelter]!.append(Dog(dog: dog, dogImage: UIImage(data: data as Data)!, searchString: searchString.lowercased()))
                         }
                     }
                 }
@@ -233,17 +232,14 @@ class BrowseSheltersViewController: UIViewController, UICollectionViewDelegate, 
     // Pass on details about dog and shelter
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "shelterToFavoritesSegue":
-            return
-        case "listToMapShelters":
-            return
-        default:
+        case "shelterToDogSegue":
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let browseDogsVC = segue.destination as! BrowseDogsViewController
                 browseDogsVC.currentShelter = shelters[self.filteredShelters[indexPath[0][1]]]
-                browseDogsVC.dogs = self.dogsByShelter[self.filteredShelters[indexPath[0][1]] + 1]!
-                browseDogsVC.filteredDogs = Array(0...(self.dogsByShelter[indexPath[0][1] + 1]!.count - 1))
+                dogs = dogsByShelter[self.filteredShelters[indexPath[0][1]] + 1]!
+                filteredDogs = Array(0...(dogsByShelter[indexPath[0][1] + 1]!.count - 1))
             }
+        default: break
         }
     }
 }

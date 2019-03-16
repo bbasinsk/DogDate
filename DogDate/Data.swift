@@ -9,6 +9,9 @@
 import Foundation
 
 var shelters : [Shelter] = []
+var dogsByShelter : [Int : [Dog]] = [:]
 
+var dogs : [Dog] = []
+var filteredDogs : [Int] = []
 
 var favoriteDogs : [Dog] = []
