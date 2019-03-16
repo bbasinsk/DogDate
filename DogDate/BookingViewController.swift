@@ -153,6 +153,20 @@ class BookingViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    @IBAction func onCallTap(_ sender: Any) {
+        let phone = currentShelter!.shelter.phone
+        var num = ""
+        let digitSet = "0123456789"
+        for i in phone {
+            if digitSet.contains(i) {
+                // is digit!
+                num += String(i)
+            }
+        }
+        guard let number = URL(string: "tel://" + num) else { return }
+        UIApplication.shared.open(number)
+    }
+    
     @IBAction func onLocationTap(_ sender: Any) {
         let address = currentShelter!.shelter.address
         let name = currentShelter!.shelter.name
