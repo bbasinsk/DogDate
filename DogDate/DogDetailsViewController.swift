@@ -12,9 +12,6 @@ import UIKit
 class DogDetailsViewController: UIViewController {
     
     var dogSearchStrings : [String] = []
-    var filteredDogs : [Int] = []
-    var dogs : [Dog] = []
-    var favoriteDogs : [Dog] = []
     var currentShelter : Shelter? = nil
     var currentDog : Dog? = nil
     
@@ -72,15 +69,11 @@ class DogDetailsViewController: UIViewController {
         case "detailToBooking":
             let detailVC = segue.destination as! BookingViewController
             detailVC.dogSearchStrings = self.dogSearchStrings
-            detailVC.filteredDogs = self.filteredDogs
-            detailVC.dogs = self.dogs
             detailVC.currentShelter = self.currentShelter
             detailVC.currentDog = self.currentDog
         case "detailToDog":
             let detailVC = segue.destination as! BrowseDogsViewController
             detailVC.dogSearchStrings = self.dogSearchStrings
-            detailVC.filteredDogs = self.filteredDogs
-            detailVC.dogs = self.dogs
             detailVC.currentShelter = self.currentShelter
         default: break
         }

@@ -16,14 +16,12 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func unwindToBrowseDogs(segue:UIStoryboardSegue) { }
     
     var dogSearchStrings : [String] = []
-    var filteredDogs : [Int] = []
-    var dogs : [Dog] = []
     
     var currentShelter : Shelter? = nil
     
     @IBAction func LikeDogButtonPress(_ sender: Any) {
         let button = sender as! UIButton
-        favoriteDogs.append(self.dogs[button.tag])
+        favoriteDogs.append(dogs[button.tag])
         
         saveFavorites()
         refreshFavorites()
@@ -47,7 +45,7 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBAction func UnlikeDogButtonPress(_ sender: Any) {
         let button = sender as! UIButton
-        favoriteDogs.remove(at: favoriteDogs.firstIndex(of: self.dogs[button.tag]) ?? -1)
+        favoriteDogs.remove(at: favoriteDogs.firstIndex(of: dogs[button.tag]) ?? -1)
         
         refreshFavorites()
     }
@@ -63,17 +61,17 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // If search bar value is updated
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let prevDogIDsDisplayed = self.filteredDogs
+        let prevDogIDsDisplayed = filteredDogs
         // Get new shelters to be displayed after filtering
-        self.filteredDogs = []
-        for (index, dog) in self.dogs.enumerated() {
+        filteredDogs = []
+        for (index, dog) in dogs.enumerated() {
             if dog.searchString.contains(searchText.lowercased()) || searchText == "" {
-                self.filteredDogs.append(index)
+                filteredDogs.append(index)
             }
         }
         
         // Prevent repeated refresh of UI if no data displayed is changing
-        if prevDogIDsDisplayed != self.filteredDogs {
+        if prevDogIDsDisplayed != filteredDogs {
             DispatchQueue.main.async {
                 self.viewDidLoad()
             }
@@ -82,20 +80,20 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.filteredDogs.count
+        return filteredDogs.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dogViewCell", for: indexPath) as! DogViewCell
-        cell.name.text = self.dogs[self.filteredDogs[indexPath.row]].dog.name
-        cell.image.image = self.dogs[self.filteredDogs[indexPath.row]].dogImage
+        cell.name.text = dogs[filteredDogs[indexPath.row]].dog.name
+        cell.image.image = dogs[filteredDogs[indexPath.row]].dogImage
         
         // Set tag on button so it can be identified on click
-        cell.like!.tag = self.filteredDogs[indexPath.row]
-        cell.unlike!.tag = self.filteredDogs[indexPath.row]
+        cell.like!.tag = filteredDogs[indexPath.row]
+        cell.unlike!.tag = filteredDogs[indexPath.row]
         
-        if favoriteDogs.contains(dogs[self.filteredDogs[indexPath.row]]) {
+        if favoriteDogs.contains(dogs[filteredDogs[indexPath.row]]) {
             cell.like!.isHidden = true
             cell.unlike!.isHidden = false
         } else {
@@ -125,15 +123,10 @@ class BrowseDogsViewController: UIViewController, UICollectionViewDelegate, UICo
         case "dogBrowseDogDetailsViewSegue":
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 let specificDogVC = segue.destination as! DogDetailsViewController
-                specificDogVC.currentDog = self.dogs[self.filteredDogs[indexPath[0][1]]]
+                specificDogVC.currentDog = dogs[filteredDogs[indexPath[0][1]]]
                 specificDogVC.currentShelter = currentShelter
-                
                 specificDogVC.dogSearchStrings = self.dogSearchStrings
-                specificDogVC.filteredDogs = self.filteredDogs
-                specificDogVC.dogs = self.dogs
             }
-        case "detailToFavoritesSegue":
-            return
         default: break
         }
     }

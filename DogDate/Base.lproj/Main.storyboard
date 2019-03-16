@@ -184,7 +184,7 @@
         <!--Browse Dogs View Controller-->
         <scene sceneID="gZ6-Io-o0j">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="bzF-Zo-9di" customClass="BrowseDogsViewController" customModule="DogDate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowseDogsViewController" extendedLayoutIncludesOpaqueBars="YES" id="bzF-Zo-9di" customClass="BrowseDogsViewController" customModule="DogDate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X71-MG-ENS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -900,8 +900,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="zNC-jU-Na7"/>
         <segue reference="zwC-zg-ZYV"/>
-        <segue reference="BgJ-Fq-OH5"/>
+        <segue reference="sLg-vn-1e6"/>
         <segue reference="1Sb-Hs-CxJ"/>
-        <segue reference="iWe-st-vBD"/>
+        <segue reference="Kxu-qd-23T"/>
     </inferredMetricsTieBreakers>
 </document>

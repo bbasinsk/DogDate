@@ -16,8 +16,6 @@ import UserNotificationsUI
 class BookingViewController: UIViewController {
     
     var dogSearchStrings : [String] = []
-    var filteredDogs : [Int] = []
-    var dogs : [Dog] = []
     var currentShelter : Shelter? = nil
     var currentDog : Dog? = nil
 	
@@ -179,8 +177,6 @@ class BookingViewController: UIViewController {
         case "bookingToDetail":
             let detailVC = segue.destination as! DogDetailsViewController
             detailVC.dogSearchStrings = self.dogSearchStrings
-            detailVC.filteredDogs = self.filteredDogs
-            detailVC.dogs = self.dogs
             detailVC.currentShelter = self.currentShelter
             detailVC.currentDog = self.currentDog
         default: break

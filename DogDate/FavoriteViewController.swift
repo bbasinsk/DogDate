@@ -63,11 +63,9 @@ class FavoriteViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     // Pass on details about favorite dogs
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "unwindToBrowseSheltersWithSegue":
-            return
-        default: break
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        switch segue.identifier {
+//        default: break
+//        }
+//    }
 }
