@@ -279,7 +279,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Kz-iw-VfD">
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Kz-iw-VfD">
                                 <rect key="frame" x="0.0" y="38" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Browse Dogs" id="HEO-Qc-Wvd">
@@ -298,9 +298,6 @@
                                     <constraint firstAttribute="height" constant="30" id="TKD-Qb-a3a"/>
                                 </constraints>
                                 <state key="normal" title="Filter"/>
-                                <connections>
-                                    <segue destination="YBE-fU-GJw" kind="show" identifier="browseToFilterSegue" id="zwC-zg-ZYV"/>
-                                </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAX-hw-dvZ">
                                 <rect key="frame" x="0.0" y="818" width="414" height="49"/>
@@ -463,94 +460,6 @@
                 <exit id="SmN-dx-BY5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-128.98550724637681" y="1406.9196428571429"/>
-        </scene>
-        <!--Filter Table View Controller-->
-        <scene sceneID="8NM-GI-kOh">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ggO-4f-DwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="YBE-fU-GJw" customClass="FilterTableViewController" customModule="DogDate" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bne-4Z-P8y">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="yZT-Ht-dFo">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Filter" id="yxY-MX-G2H">
-                                    <barButtonItem key="leftBarButtonItem" title="Back" id="Leg-Ox-YPb"/>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bCC-QP-f7a">
-                            <rect key="frame" x="0.0" y="116" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Clear"/>
-                        </button>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Xyx-br-UQg">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xyx-br-UQg" id="DsA-FH-UO4">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="YBE-fU-GJw" id="Gzj-Ny-G8Q"/>
-                            <outlet property="delegate" destination="YBE-fU-GJw" id="bHQ-hh-U7v"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="HD8-9R-M4B" kind="show" identifier="filterToBreed" id="Vth-8v-fr4"/>
-                        <segue destination="bzF-Zo-9di" kind="show" identifier="filterToBrowse" id="fzA-vf-iG1"/>
-                    </connections>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="833" y="1410"/>
-        </scene>
-        <!--Breed View Controller-->
-        <scene sceneID="Fnw-Ld-8Db">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lpM-CZ-cJQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="HD8-9R-M4B" customClass="BreedViewController" customModule="DogDate" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="73T-Eu-UZO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="Se6-B8-hxN">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Breed" id="YLd-QX-n2a">
-                                    <barButtonItem key="leftBarButtonItem" title="Back" id="WJ9-5i-noB"/>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="03f-u8-WiM">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="03f-u8-WiM" id="DHa-lz-Uoa">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="HD8-9R-M4B" id="PQ7-0A-49D"/>
-                            <outlet property="delegate" destination="HD8-9R-M4B" id="jfM-Ag-M63"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="YBE-fU-GJw" kind="show" identifier="breedToFilter" id="vPg-78-Vjj"/>
-                    </connections>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="1774" y="1409"/>
         </scene>
         <!--Dog Details View Controller-->
         <scene sceneID="m7j-Hd-1y6">
@@ -944,9 +853,7 @@
         <image name="shelter1" width="7952" height="5304"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bHx-fd-Xcz"/>
         <segue reference="ipL-p9-gFb"/>
-        <segue reference="zwC-zg-ZYV"/>
         <segue reference="sLg-vn-1e6"/>
         <segue reference="JBf-md-M5p"/>
         <segue reference="Kxu-qd-23T"/>
