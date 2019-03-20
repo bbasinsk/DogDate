@@ -82,6 +82,7 @@ class BookingViewController: UIViewController {
         dogImage.image = currentDog?.dogImage
         contactButton.setTitle("" + currentShelter!.shelter.phone, for: .normal)
         locationButton.setTitle("" + currentShelter!.shelter.address, for: .normal)
+        locationButton.titleLabel?.numberOfLines = 2
         //set default begin date
         dateEndPicker.isEnabled = false
         let formatter = DateFormatter()

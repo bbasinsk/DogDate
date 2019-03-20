@@ -473,7 +473,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="yZT-Ht-dFo">
-                            <rect key="frame" x="0.0" y="0.0" width="336" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Filter" id="yxY-MX-G2H">
@@ -521,7 +521,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="Se6-B8-hxN">
-                            <rect key="frame" x="0.0" y="0.0" width="336" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Breed" id="YLd-QX-n2a">
@@ -801,6 +801,9 @@
                                                     <constraint firstAttribute="height" constant="20" id="uwk-sU-DMu"/>
                                                 </constraints>
                                                 <state key="normal" title="Call Button"/>
+                                                <connections>
+                                                    <action selector="onCallTap:" destination="1Kk-PQ-N9Z" eventType="touchUpInside" id="9ww-O0-Eyc"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7em-Rf-Arc">
                                                 <rect key="frame" x="24" y="58.666666666666686" width="65.666666666666671" height="20"/>
@@ -811,7 +814,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b16-xp-m5a">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="b16-xp-m5a">
                                                 <rect key="frame" x="242" y="58.666666666666686" width="109" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="dTd-c7-jM8"/>
@@ -941,7 +944,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAV-HX-6zS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2688.8000000000002" y="542.87856071964018"/>
+            <point key="canvasLocation" x="2688.8000000000002" y="542.36453201970448"/>
         </scene>
     </scenes>
     <resources>
@@ -950,10 +953,10 @@
         <image name="shelter1" width="7952" height="5304"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zNC-jU-Na7"/>
+        <segue reference="ipL-p9-gFb"/>
         <segue reference="zwC-zg-ZYV"/>
-        <segue reference="sLg-vn-1e6"/>
+        <segue reference="BgJ-Fq-OH5"/>
         <segue reference="JBf-md-M5p"/>
-        <segue reference="Kxu-qd-23T"/>
+        <segue reference="iWe-st-vBD"/>
     </inferredMetricsTieBreakers>
 </document>
