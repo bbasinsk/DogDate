@@ -367,7 +367,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search keywords..." translatesAutoresizingMaskIntoConstraints="NO" id="HvE-em-EXT">
+                            <searchBar hidden="YES" contentMode="redraw" searchBarStyle="minimal" placeholder="Search keywords..." translatesAutoresizingMaskIntoConstraints="NO" id="HvE-em-EXT">
                                 <rect key="frame" x="20" y="95" width="335" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="kXQ-FH-EeP"/>
