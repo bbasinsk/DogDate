@@ -220,7 +220,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JDD-Mn-jNv">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JDD-Mn-jNv">
                                 <rect key="frame" x="0.0" y="201" width="414" height="616"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yCX-dW-IZ2">
@@ -291,6 +291,17 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhA-Zt-6Pj">
+                                <rect key="frame" x="344" y="152" width="35" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="9Pu-Jm-ux0"/>
+                                    <constraint firstAttribute="height" constant="30" id="TKD-Qb-a3a"/>
+                                </constraints>
+                                <state key="normal" title="Filter"/>
+                                <connections>
+                                    <segue destination="YBE-fU-GJw" kind="show" identifier="browseToFilterSegue" id="zwC-zg-ZYV"/>
+                                </connections>
+                            </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAX-hw-dvZ">
                                 <rect key="frame" x="0.0" y="818" width="414" height="49"/>
                                 <items>
@@ -318,13 +329,14 @@
                             <constraint firstItem="0Kz-iw-VfD" firstAttribute="width" secondItem="4Mr-SF-0Nw" secondAttribute="width" id="LIS-YS-dsg"/>
                             <constraint firstItem="cAX-hw-dvZ" firstAttribute="top" secondItem="JDD-Mn-jNv" secondAttribute="bottom" constant="1" id="Q3C-rm-ZKH"/>
                             <constraint firstItem="cAX-hw-dvZ" firstAttribute="width" secondItem="4Mr-SF-0Nw" secondAttribute="width" id="VAC-Kv-gj1"/>
+                            <constraint firstItem="lhA-Zt-6Pj" firstAttribute="top" secondItem="0Kz-iw-VfD" secondAttribute="bottom" constant="70" id="ZwK-ty-jdO"/>
                             <constraint firstItem="cAX-hw-dvZ" firstAttribute="top" secondItem="4Mr-SF-0Nw" secondAttribute="bottom" constant="-44" id="bms-bd-tzF"/>
                             <constraint firstItem="1iX-Qc-ekl" firstAttribute="leading" secondItem="4Mr-SF-0Nw" secondAttribute="leading" constant="31" id="d5p-SV-e3w"/>
                             <constraint firstItem="Puj-nX-EuW" firstAttribute="leading" secondItem="4Mr-SF-0Nw" secondAttribute="leading" constant="18" id="gfJ-Q0-5Qr"/>
                             <constraint firstItem="JDD-Mn-jNv" firstAttribute="trailing" secondItem="4Mr-SF-0Nw" secondAttribute="trailing" id="qxS-pb-HLJ"/>
-                            <constraint firstAttribute="trailing" secondItem="0Kz-iw-VfD" secondAttribute="trailing" id="tVD-4D-JHK"/>
+                            <constraint firstItem="4Mr-SF-0Nw" firstAttribute="trailing" secondItem="lhA-Zt-6Pj" secondAttribute="trailing" constant="35" id="tFo-Y7-DMo"/>
                             <constraint firstItem="1iX-Qc-ekl" firstAttribute="top" secondItem="0Kz-iw-VfD" secondAttribute="bottom" constant="75" id="tWd-2K-7ox"/>
-                            <constraint firstItem="0Kz-iw-VfD" firstAttribute="leading" secondItem="4Mr-SF-0Nw" secondAttribute="leading" id="tfL-va-FFx"/>
+                            <constraint firstItem="JDD-Mn-jNv" firstAttribute="top" secondItem="lhA-Zt-6Pj" secondAttribute="bottom" constant="19" id="vCz-Yr-CqM"/>
                             <constraint firstItem="cAX-hw-dvZ" firstAttribute="trailing" secondItem="4Mr-SF-0Nw" secondAttribute="trailing" id="zpX-WV-9dt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Mr-SF-0Nw"/>
@@ -451,6 +463,94 @@
                 <exit id="SmN-dx-BY5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-128.98550724637681" y="1406.9196428571429"/>
+        </scene>
+        <!--Filter Table View Controller-->
+        <scene sceneID="8NM-GI-kOh">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggO-4f-DwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="YBE-fU-GJw" customClass="FilterTableViewController" customModule="DogDate" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bne-4Z-P8y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="yZT-Ht-dFo">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Filter" id="yxY-MX-G2H">
+                                    <barButtonItem key="leftBarButtonItem" title="Back" id="Leg-Ox-YPb"/>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bCC-QP-f7a">
+                            <rect key="frame" x="0.0" y="116" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Clear"/>
+                        </button>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Xyx-br-UQg">
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xyx-br-UQg" id="DsA-FH-UO4">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="YBE-fU-GJw" id="Gzj-Ny-G8Q"/>
+                            <outlet property="delegate" destination="YBE-fU-GJw" id="bHQ-hh-U7v"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="HD8-9R-M4B" kind="show" identifier="filterToBreed" id="Vth-8v-fr4"/>
+                        <segue destination="bzF-Zo-9di" kind="show" identifier="filterToBrowse" id="fzA-vf-iG1"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="833" y="1410"/>
+        </scene>
+        <!--Breed View Controller-->
+        <scene sceneID="Fnw-Ld-8Db">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lpM-CZ-cJQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="HD8-9R-M4B" customClass="BreedViewController" customModule="DogDate" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="73T-Eu-UZO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="Se6-B8-hxN">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Breed" id="YLd-QX-n2a">
+                                    <barButtonItem key="leftBarButtonItem" title="Back" id="WJ9-5i-noB"/>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="03f-u8-WiM">
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="03f-u8-WiM" id="DHa-lz-Uoa">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="HD8-9R-M4B" id="PQ7-0A-49D"/>
+                            <outlet property="delegate" destination="HD8-9R-M4B" id="jfM-Ag-M63"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="YBE-fU-GJw" kind="show" identifier="breedToFilter" id="vPg-78-Vjj"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1774" y="1409"/>
         </scene>
         <!--Dog Details View Controller-->
         <scene sceneID="m7j-Hd-1y6">
@@ -846,6 +946,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="bHx-fd-Xcz"/>
         <segue reference="ipL-p9-gFb"/>
+        <segue reference="zwC-zg-ZYV"/>
         <segue reference="sLg-vn-1e6"/>
         <segue reference="JBf-md-M5p"/>
         <segue reference="Kxu-qd-23T"/>
